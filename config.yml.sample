@@ -7,3 +7,11 @@ esx:
     vmware_user: 'root'
     vmware_password: 'password'
     ignore_ssl: True
+
+vm_interval: null
+vm_perf_list:
+  - cpu.usage.average
+  - cpu.usagemhz.average
+  - disk.usage.average
+  - mem.usage.average
+  - net.usage.average

@@ -334,18 +334,8 @@ class VMWareMetricsResource(Resource):
         """
 
         # List of performance counter we want
-        perf_list = [
-            'cpu.ready.summation',
-            'cpu.usage.average',
-            'cpu.usagemhz.average',
-            'disk.usage.average',
-            'disk.read.average',
-            'disk.write.average',
-            'mem.usage.average',
-            'net.received.average',
-            'net.transmitted.average',
-            ]
-
+        perf_list = self.config['vm_perf_list']
+        
         # Prepare gauges
         for p in perf_list:
             p_metric = 'vmware_vm_' + p.replace('.', '_')
@@ -376,7 +366,7 @@ class VMWareMetricsResource(Resource):
                                                         maxSample=1,
                                                         entity=vm,
                                                         metricId=[metric_id],
-                                                        intervalId=20)
+                                                        intervalId=self.config['vm_interval'])
                     result = content.perfManager.QueryStats(querySpec=[spec])
                     try:
                         vm_metrics[p_metric].add_metric([vm.name],
